@@ -1,87 +1,62 @@
-<?php
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-session_start();
+    <!-- ===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-// Check login status
-if (isset($_SESSION['email'])) {
-    header('Location:../FrontEnd/index.php');
-    exit;
-}
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="../Css/register.css">
 
-require_once 'config.php';
-$email = $password = "";
-$err = "";
-$email_err = $password_err = "";
+    <title>Login Form</title>
+</head>
+<body>
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (empty(trim($_POST['email'])) || empty(trim($_POST['password']))) {
-        $err = "Please enter a email and password";
-    }
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
+    <div class="container">
+        <div class="forms">
+            <!-- Login Form -->
+            <div class="form login">
+                <span class="title">Login</span>
 
+                <form action="#">
+                    <div class="input-field">
+                        <input type="text" placeholder="Enter your email" required>
+                        <i class="uil uil-envelope icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" class="password" placeholder="Enter your password" required>
+                        <i class="uil uil-lock icon"></i>
+                        <i class="uil uil-eye-slash showHidePw"></i>
+                    </div>
 
-    if (empty($err)) {
-        $sql = "SELECT id, email, password FROM users WHERE email = ?";
-        $stmt = mysqli_prepare($conn, $sql);
+                    <div class="checkbox-text">
+                        <div class="checkbox-content">
+                            <input type="checkbox" id="logCheck">
+                            <label for="logCheck" class="text">Remember me</label>
+                        </div>
 
-        mysqli_stmt_bind_param($stmt, "s", $param_email);
-        $param_email = $email;
+                        <a href="#" class="text">Forgot password?</a>
+                    </div>
 
-        if (mysqli_stmt_execute($stmt)) {
-            mysqli_stmt_store_result($stmt);
-            if (mysqli_stmt_num_rows($stmt) == 1) {
-                mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
-                if (mysqli_stmt_fetch($stmt)) {
-                    $password = $hashed_password;
-                    if (password_verify($password, $hashed_password)) {
-                        // If password is correct
-                        session_start();
-                        $_SESSION["email"] = $email;
-                        $_SESSION["id"] = $id;
-                        $_SESSION["loggedin"] = true;
+                    <div class="input-field button">
+                        <input type="button" value="Login">
+                    </div>
+                </form>
 
-                        header("Location:../FrontEnd/index.php");
-                    }
-                }
-            }
-        }
-    }
-}
-
-?>
-<link rel="stylesheet" href="../Css/register.css">
-<div class="form login">
-    <span class="title">Login</span>
-
-    <form action="" method="post">
-        <div class="input-field">
-            <input type="text" name="email" placeholder="Enter your email" required>
-            <i class="uil uil-envelope icon"></i>
-        </div>
-        <div class="input-field">
-            <input type="password" name="password" class="password" placeholder="Enter your password" required>
-            <i class="uil uil-lock icon"></i>
-            <i class="uil uil-eye-slash showHidePw"></i>
-        </div>
-
-        <div class="checkbox-text">
-            <div class="checkbox-content">
-                <input type="checkbox" id="logCheck">
-                <label for="logCheck" class="text">Remember me</label>
+                <div class="login-signup">
+                    <span class="text">Not a member?
+                        <a href="register.php" class="text signup-link">Signup Now</a>
+                    </span>
+                </div>
             </div>
-
-            <a href="#" class="text">Forgot password?</a>
         </div>
-
-        <div class="input-field button">
-            <input type="submit" value="Login">
-        </div>
-    </form>
-
-    <div class="login-signup">
-        <span class="text">Not a member?
-            <a href="register.php" class="text signup-link">Signup Now</a>
-        </span>
     </div>
-</div>
+    <style></style>
+
+    <script src="../Javascript/register.js"></script>
+</body>
+</html>
