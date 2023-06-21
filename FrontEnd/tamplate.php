@@ -25,7 +25,7 @@
 
             <div class="button-parent">
                 <div class="button-1">
-                    <a class="sign-in" href="#">create your card</a>
+                    <a class="sign-in" href="form.php">create your card</a>
                     <a class="get" href="../Backend/login.php">Login</a>
                 </div>
             </div>
@@ -36,7 +36,7 @@
             <h1 class="first-head">Expand your <br>
                 online presence</h1>
             <p class="first-p">Expand your business with</p>
-            <a   href="#"  > Get Started <img src="../images/array.svg" alt=""></a>
+            <a   href="form.php"  > Get Started <img src="../images/array.svg" alt=""></a>
         </div>
 
 
